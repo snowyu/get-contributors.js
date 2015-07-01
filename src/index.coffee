@@ -90,13 +90,10 @@ module.exports = (options, done)->
         continue unless user.id?
         id = ixEmails[user.email]
         if not id?
-          console.log 'user.id', user.id
           u = usersCache[user.id] = {}
         else
           u = usersCache[id]
-        console.log 'user=', user
         for k,v of user
-          console.log k,'=',v
           if v? and not (k in ['id', 'commits', 'percent'])
             if k is 'email' and _.isArray(u[k])
               u[k].push v unless v in u[k]
