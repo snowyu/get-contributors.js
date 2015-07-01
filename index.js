@@ -83,6 +83,9 @@ if (argv.help) {
       case 'template':
         console.log(renderTemplate(argv))
         break
+      case 'cson':
+        console.log(CSON.stringify(contributors))
+        break
       default:
         console.log(JSON.stringify(contributors, null, 1))
     }

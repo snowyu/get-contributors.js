@@ -37,7 +37,10 @@ Options:
                         * github: the github user name(it could be used as a user id)
                         * commits: the commits count of this contributor
                         * percent: the percentage with the contribution
-  -f, --format          The output format, template or markdown, Default: json
+  -f, --format          The output format, the customized template, cson or json, Default: json
+                        * template: the customized template via user
+                        * json: the json format
+                        * cson: the cson format
   -a, --ask             whether ask the user to input it if can not find the github user name, Default: yes
                         --no-ask to disable it.
   -t, --template        the template for the template format. Default:
