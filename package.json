@@ -1,7 +1,7 @@
 {
   "name": "get-contributors",
   "description": "Get contributors from git, and generate a JSON list of contributors or a list base on a user defined template.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/snowyu/get-contributors.js",
   "preferGlobal": true,
   "bin": {
@@ -14,6 +14,7 @@
   "files": [
     "README.md",
     "LICENSE-MIT",
+    "usage.txt",
     "*.js",
     "*.coffee",
     "test",
