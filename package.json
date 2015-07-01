@@ -1,7 +1,7 @@
 {
   "name": "get-contributors",
   "description": "Get contributors from git, and generate a JSON list of contributors or a list base on a user defined template.",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "homepage": "https://github.com/snowyu/get-contributors.js",
   "preferGlobal": true,
   "bin": {
