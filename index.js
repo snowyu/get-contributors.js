@@ -66,7 +66,7 @@ if (argv.fields) {
 }
 
 if (argv.info) {
-  console.log(argv)
+  console.error(argv)
 }
 
 if (argv.help) {
