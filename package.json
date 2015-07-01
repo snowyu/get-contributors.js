@@ -1,0 +1,87 @@
+{
+  "name": "get-contributors",
+  "description": "Get contributors from git, and generate a JSON list of contributors or a list base on a user defined template.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/snowyu/get-contributors.js",
+  "preferGlobal": true,
+  "bin": {
+    "get-contributors": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/snowyu/get-contributors.js.git"
+  },
+  "files": [
+    "README.md",
+    "LICENSE-MIT",
+    "*.js",
+    "*.coffee",
+    "test",
+    "src",
+    "lib"
+  ],
+  "keywords": [
+    "git",
+    "github",
+    "contributor",
+    "contributors",
+    "get",
+    "process",
+    "update",
+    "lazy",
+    "automatic"
+  ],
+  "dependencies": {
+    "bluebird": "^2.9.30",
+    "cson": "^3.0.1",
+    "git-contributors": "^0.2.3",
+    "inquirer": "^0.8.5",
+    "lodash": "^3.9.3",
+    "map-limit": "0.0.1",
+    "minimist": "^1.1.1",
+    "octonode": "^0.6.18",
+    "read-file": "^0.1.2",
+    "userhome": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "~1.10.0",
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-coffee": "~0.12.0",
+    "grunt-contrib-copy": "~0.7.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-mocha-test": "~0.12.6",
+    "grunt-newer": "~0.8.0",
+    "grunt-release": "~0.9.0",
+    "mocha": "~2.1.0",
+    "pre-commit": "~1.0.2",
+    "rimraf": "~2.2.8",
+    "shasum": "1.0.0",
+    "sinon": "~1.12.2",
+    "sinon-chai": "~2.6.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "contributors": [
+    {
+      "name": "Riceball LEE",
+      "email": "snowyu.lee@gmail.com",
+      "url": "https://github.com/snowyu"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Riceball LEE",
+      "email": "snowyu.lee@gmail.com"
+    }
+  ],
+  "pre-commit": [
+    "test"
+  ],
+  "bugs": {
+    "url": "https://github.com/snowyu/get-contributors.js/issues"
+  },
+  "license": "MIT",
+  "stability": "unstable"
+}
