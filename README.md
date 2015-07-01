@@ -32,6 +32,8 @@ Options:
                         Default: yes, --no-write to disable it.
   -e, --fields          The output fields name, separate via comma. Default: "name,github"
                         * name: the user name
+                        * email: the user email address
+                          the user can have many emails, see contributors configuration.
                         * github: the github user name(it could be used as a user id)
                         * commits: the commits count of this contributor
                         * percent: the percentage with the contribution
@@ -51,7 +53,7 @@ Options:
 
 ```
 
-The contrbutors configuration file(cson format):
+The contributors configuration file(cson format):
 
 ```coffee
 
