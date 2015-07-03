@@ -38,7 +38,6 @@
     "git-contributors": "^0.2.3",
     "inquirer": "^0.8.5",
     "lodash": "^3.9.3",
-    "map-limit": "0.0.1",
     "minimist": "^1.1.1",
     "octonode": "^0.6.18",
     "read-file": "^0.1.2",

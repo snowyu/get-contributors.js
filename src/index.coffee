@@ -1,7 +1,6 @@
 contributors  = require('git-contributors').GitContributors
 CSON          = require('CSON')
 Promise       = require('bluebird')
-map           = require('map-limit')
 inquirer      = require('inquirer')
 _             = require('lodash')
 #userhome      = require('userhome')
