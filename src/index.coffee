@@ -101,11 +101,14 @@ module.exports = (options, done)->
       try opts = CSON.requireFile(options.config)
       opts = {} unless opts?
       opts.users = usersCache
-      fs.writeFileAsync(options.config, CSON.stringify opts)
+      fs.writeFileAsync(options.config, CSON.stringify opts, null, '  ')
       .then ->users
     else
       users
-  .then (users)->
+  .then (users)-> # sort by percent
+    _.sortBy users, (committer)->
+      return -committer.percent
+  .then (users)-> # filter fields:
     if _.isArray(fields)
       users.forEach (user)->
         for k,v of user
