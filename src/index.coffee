@@ -56,7 +56,7 @@ deduplicateUser = (users, emails)->
 module.exports = (options, done)->
   options = options || {}
   dirname = options.dirname
-  usersCache = options.users
+  usersCache = options.users || {}
   fields  = options.fields
   ixEmails = genEmailIndex usersCache
   needUpdateCache = false
@@ -106,4 +106,10 @@ module.exports = (options, done)->
       .then ->users
     else
       users
+  .then (users)->
+    if _.isArray(fields)
+      users.forEach (user)->
+        for k,v of user
+          delete user[k] if not (k in fields)
+    users
   .nodeify(done)
