@@ -25,7 +25,11 @@ Options:
                         * cson: the cson format
   -a, --ask             whether ask the user to input it if can not find the github user name, Default: yes
                         --no-ask to disable it.
-  -t, --template        the template for the template format. Default:
+  -t, --template        The template for the template format. It supports the simple template and
+                        the complex template. the complex template has three part, head template,
+                        body template and tail template, the head and tail could be ignore. (you should define this in configuration
+                        file only)
+                        Default:
                         <% _.forEach(contributors, function(contributor) {
                              var item = contributor.name
                              if (contributor.github)
@@ -33,5 +37,17 @@ Options:
                              print(" * " + item)
                            }
                         %>
+                        Complex template(in the congfiguration file) example:
+                        template: [
+                        	'''
+                        		| Contributor Name | Github |
+                        		| ---------------  | ------ |
+		
+                        	'''
+                        	'''
+                        		| ${contributor.name} | ${contributor.github} |
+		
+                        	'''
+                        ]
   -i, --info            Show configuration infomation.
   -h, --help            Show this help infomation.
