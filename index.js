@@ -61,7 +61,7 @@ if (argv.config !== options.config) try {
   })
 } catch(e){}
 
-if (argv.fields) {
+if (_.isString(argv.fields)) {
   argv.fields = argv.fields.split(',')
 }
 
