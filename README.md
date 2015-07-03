@@ -29,7 +29,8 @@ base on a user defined template.
 
 Options:
   -d, --dirname         The git project to get contributors. Default: $(pwd)
-  -c, --config          The contrbutors configuration file. Default: ${pwd}/.contributors
+  -c, --config          The contrbutors configuration file. It uses the CSON format.
+                        Default: ${pwd}/.contributors
   -g, --tryGithub       try to get the github user name from the email via Search the github.
                         Default: yes, --no-tryGithub to disable it.
   -w, --write           Write the contrbutors configuration file if it has new contrbutors comming.
@@ -48,10 +49,9 @@ Options:
   -a, --ask             whether ask the user to input it if can not find the github user name, Default: yes
                         --no-ask to disable it.
   -t, --template        The template for the template format. It supports the simple template and
-                        the complex template. the complex template has three part, head template,
+                        the complex template. the complex template has three parts, head template,
                         body template and tail template, the head and tail could be ignore. (you
-                        should define this in configuration
-                        file only)
+                        should define this in the configuration file only)
                         Default:
                         <% _.forEach(contributors, function(contributor) {
                              var item = contributor.name
