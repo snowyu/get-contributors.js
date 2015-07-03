@@ -10,12 +10,6 @@ const fs              = require('fs')
 const _               = require('lodash')
 const renderTemplate  = require('./lib/render-template')
 const cwd         = process.cwd()
-const defaults    = _.partialRight(_.assign, function(value, other) {
-  if (value == null) return other
-    if (_.isObject(value))
-    value = _.assign(other, value)
-  return value
-})
 
 const optsfileName = path.join(cwd, '.contributors')
 const defaultOptions = {
@@ -41,12 +35,12 @@ const aliasOptions = {
 }
 var options = defaultOptions
 try {
-  options = defaults(CSON.requireFile(optsfileName), options)
+  options = _.defaultsDeep(CSON.requireFile(optsfileName), options)
 } catch(e){}
 
 var argv = minimist(process.argv.slice(2), {
   alias: aliasOptions,
-  default: options
+  'default': options
 })
 
 //console.log('argv0', argv)
@@ -54,10 +48,10 @@ if (argv.config !== options.config) try {
   //the user specify the conf file
   //console.log('load', argv.config)
   var opts = CSON.requireFile(argv.config)
-  defaults(opts, options)
+  _.defaultsDeep(opts, options)
   argv = minimist(process.argv.slice(2), {
     alias: aliasOptions,
-    default: opts
+    'default': opts
   })
 } catch(e){}
 
@@ -78,16 +72,17 @@ if (argv.help) {
 } else {
   getContributors(argv, function (err, contributors) {
     if (err) throw err
-    argv.contributors = contributors
     switch (argv.format) {
       case 'template':
+        argv.contributors = contributors
         console.log(renderTemplate(argv))
         break
       case 'cson':
-        console.log(CSON.stringify(contributors))
+        console.log(CSON.stringify(contributors, null, '  '))
         break
       default:
         console.log(JSON.stringify(contributors, null, 1))
+        break
     }
   })
 }
