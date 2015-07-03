@@ -6,9 +6,13 @@
 
 Get contributors from git, and generate a JSON list of contributors or a list base on a user defined template.
 
+* The contributors is sorted by the contribution of the order.
+* It could show the commits and the percentage contribution in the project.
 * It could add customized fields to output
 * It could use a customized template format to output
-* It could assign the github user name from the email address of the contributor.
+* It could search and assign the github user name from the email address of the contributor.
+* It could ask the user the information of the unknown fields(github etc) at the command line
+* It could write the new contributors to your contributors configuration file(.contributors)
 * It could merge multi-email addresses into one contributor if you've set on your
   contributors file(.contributors). the ".contributors" file should be put into the
   current diretory if no specified position.
