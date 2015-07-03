@@ -27,7 +27,8 @@ Options:
                         --no-ask to disable it.
   -t, --template        The template for the template format. It supports the simple template and
                         the complex template. the complex template has three part, head template,
-                        body template and tail template, the head and tail could be ignore. (you should define this in configuration
+                        body template and tail template, the head and tail could be ignore. (you
+                        should define this in configuration
                         file only)
                         Default:
                         <% _.forEach(contributors, function(contributor) {
