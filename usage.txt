@@ -24,8 +24,8 @@ Options:
                         * template: the customized template via user
                         * json: the json format
                         * cson: the cson format
-  -a, --ask             whether ask the user to input it if can not find the github user name, Default: yes
-                        --no-ask to disable it.
+  -a, --ask             whether ask the user to input if it can not find the field(github,etc).
+                        Default: yes, --no-ask to disable it.
   -t, --template        The template for the template format. It supports the simple template and
                         the complex template. the complex template has three parts, head template,
                         body template and tail template, the head and tail could be ignore. (you
