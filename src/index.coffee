@@ -1,5 +1,5 @@
 contributors  = require('git-contributors').GitContributors
-CSON          = require('CSON')
+CSON          = require('cson')
 Promise       = require('bluebird')
 inquirer      = require('inquirer')
 _             = require('lodash')
