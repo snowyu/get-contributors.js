@@ -14,6 +14,7 @@ contributors  = require('git-contributors').GitContributors
 fakeResults = []
 fakeError = null
 # mock this method
+###
 contributors.constructor::list = sinon.spy (options, callback)->
   options = options || {}
   if fakeError?
@@ -21,6 +22,15 @@ contributors.constructor::list = sinon.spy (options, callback)->
   else
     callback(null, fakeResults)
   return
+###
+sinon.stub contributors, 'list', (options, callback)->
+  options = options || {}
+  if fakeError?
+    callback(fakeError)
+  else
+    callback(null, fakeResults)
+  return
+
 
 getContributors = require '../src/'
 
