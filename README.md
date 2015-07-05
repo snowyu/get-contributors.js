@@ -17,6 +17,11 @@ Get contributors from git, and generate a JSON list of contributors or a list ba
   contributors file(.contributors). the ".contributors" file should be put into the
   current diretory if no specified position.
 
+## TODO
+
++ ! the percentage contribution in the project should use the changes mainly:
+  * contributions = commits*weight.commits(0.618) + insertions + deletions * weight.deletion(0.382)
+
 ## Usage
 
 ```bash
