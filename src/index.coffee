@@ -1,4 +1,4 @@
-contributors  = require('git-contributors').GitContributors
+contributors  = require('git-commiters')
 CSON          = require('cson')
 Promise       = require('bluebird')
 inquirer      = require('inquirer')
@@ -14,7 +14,7 @@ ghsearch      = github.search()
 Promise.promisifyAll(fs);
 
 ghSearchUser = Promise.promisify ghsearch.users, ghsearch
-gitListContributors = Promise.promisify contributors.list, contributors
+gitListContributors = Promise.promisify contributors
 
 genEmailIndex = (users)->
   result = {}
