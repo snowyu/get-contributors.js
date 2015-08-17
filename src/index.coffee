@@ -25,6 +25,8 @@ genEmailIndex = (users)->
       else
         result[user.email] = id
   result
+
+statFields = ['commits', 'percent', 'deletions', 'insertions']
 deduplicateUser = (users, emails)->
   # merge the user of the same email address
   t = users
@@ -32,8 +34,8 @@ deduplicateUser = (users, emails)->
   t.forEach (user, index)->
     for u in users
       if user.email is u.email
-        u.percent += user.percent
-        u.commits += user.commits
+        for k in statFields
+          u[k] += user[k] if u[k]?
         return
     vUserId = emails[user.email]
     user.id = vUserId if vUserId
@@ -45,8 +47,8 @@ deduplicateUser = (users, emails)->
   t.forEach (user, index)->
     for u in users
       if user.id and user.id is u.id
-        u.percent += user.percent
-        u.commits += user.commits
+        for k in statFields
+          u[k] += user[k] if u[k]?
         return
     users.push(user)
   users
@@ -93,7 +95,7 @@ module.exports = (options, done)->
         else
           u = usersCache[id]
         for k,v of user
-          if v? and not (k in ['id', 'commits', 'percent'])
+          if v? and not (k in ['id', 'commits', 'percent', 'deletions', 'insertions'])
             if k is 'email' and _.isArray(u[k])
               u[k].push v unless v in u[k]
               continue
@@ -107,7 +109,7 @@ module.exports = (options, done)->
       users
   .then (users)-> # sort by percent
     _.sortBy users, (committer)->
-      return -committer.percent
+      return -committer.commits
   .then (users)-> # filter fields:
     if _.isArray(fields)
       users.forEach (user)->
