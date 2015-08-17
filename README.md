@@ -21,13 +21,14 @@ Get contributors from git, and generate a JSON list of contributors or a list ba
 
 + ! the percentage contribution in the project should use the changes mainly:
   * contributions = commits*weight.commits(0.618) + insertions + deletions * weight.deletion(0.382)
+* percent field is disabled temporarily.
 
 ## Usage
 
 ```bash
 Usage get-contributors {OPTIONS}
 
-Get contributors from git, and generate 
+Get contributors from git, and generate
 a JSON list of contributors. or a list
 base on a user defined template.
 
@@ -70,11 +71,11 @@ Options:
                         	'''
                         		| Contributor Name | Github |
                         		| ---------------  | ------ |
-		
+
                         	'''
                         	'''
                         		| ${contributor.name} | ${contributor.github} |
-		
+
                         	'''
                         ]
   -i, --info            Show configuration infomation.
@@ -94,11 +95,11 @@ template: [
 	'''
 		| Contributor Name | Github |
 		| ---------------  | ------ |
-		
+
 	'''
 	'''
 		| ${contributor.name} | ${contributor.github ? "[" + contributor.github + "](https://github.com/" + contributor.github + ")" : "-"} |
-		
+
 	'''
 ]
 users:
