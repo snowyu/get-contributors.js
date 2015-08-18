@@ -14,14 +14,18 @@ Get contributors from git, and generate a JSON list of contributors or a list ba
 * It could ask the user the information of the unknown fields(github etc) at the command line
 * It could write the new contributors to your contributors configuration file(.contributors)
 * It could merge multi-email addresses into one contributor if you've set on your
-  contributors file(.contributors). the ".contributors" file should be put into the
+  contributors file(".contributors"). the ".contributors" file should be put into the
   current diretory if no specified position.
 
-## TODO
+## Changes
 
-+ ! the percentage contribution in the project should use the changes mainly:
-  * contributions = commits*weight.commits(0.618) + insertions + deletions * weight.deletion(0.382)
-* percent field is disabled temporarily.
+### v0.4
+
++ the percentage contribution in the project should use the changes mainly:
+  * contributions = commits*weight.commit(0.618) + insertions + deletions * weight.deletion(0.1)
++ weight option
++ branch option: the git branch to get the contributors.
++ path option: get the contributors of the specified path in the git's working directory
 
 ## Usage
 
@@ -34,11 +38,18 @@ base on a user defined template.
 
 
 Options:
-  -d, --dirname         The git project to get contributors. Default: $(pwd)
+  -d, --dirname         The git project(git working dir) to get contributors. Default: $(pwd)
   -c, --config          The contrbutors configuration file. It uses the CSON format.
                         Default: ${pwd}/.contributors
+  -b, --branch          get the contributors on the git branch.
+                        Default: current branch(HEAD).
+      --path            get the contributors on the specified path in the git's working directory.
+                        Default: root dir(all).
   -g, --tryGithub       try to get the github user name from the email via Search the github.
                         Default: yes, --no-tryGithub to disable it.
+  -p, --weight          the commits and deletion weight of contribution:
+                        It means the weight of commits if it's a number.
+                        Default: "commit:0.618,deletion:0.1".
   -w, --write           Write the contrbutors configuration file if it has new contrbutors comming.
                         Default: yes, --no-write to disable it.
   -e, --fields          The output fields name, separate via comma. Default: "name,github"

@@ -1,16 +1,23 @@
 Usage get-contributors {OPTIONS}
 
-Get contributors from git, and generate 
+Get contributors from git, and generate
 a JSON list of contributors. or a list
 base on a user defined template.
 
 
 Options:
-  -d, --dirname         The git project to get contributors. Default: $(pwd)
+  -d, --dirname         The git project(git working dir) to get contributors. Default: $(pwd)
   -c, --config          The contrbutors configuration file. It uses the CSON format.
                         Default: ${pwd}/.contributors
+  -b, --branch          get the contributors on the git branch.
+                        Default: current branch(HEAD).
+      --path            get the contributors on the specified path in the git's working directory.
+                        Default: root dir(all).
   -g, --tryGithub       try to get the github user name from the email via Search the github.
                         Default: yes, --no-tryGithub to disable it.
+  -p, --weight          the commits and deletion weight of contribution:
+                        It means the weight of commits if it's a number.
+                        Default: "commit:0.618,deletion:0.1".
   -w, --write           Write the contrbutors configuration file if it has new contrbutors comming.
                         Default: yes, --no-write to disable it.
   -e, --fields          The output fields name, separate via comma. Default: "name,github"
@@ -43,11 +50,11 @@ Options:
                         	'''
                         		| Contributor Name | Github |
                         		| ---------------  | ------ |
-		
+
                         	'''
                         	'''
                         		| ${contributor.name} | ${contributor.github} |
-		
+
                         	'''
                         ]
   -i, --info            Show configuration infomation.
