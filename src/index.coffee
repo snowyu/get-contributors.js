@@ -26,8 +26,8 @@ genEmailIndex = (users)->
         result[user.email] = id
   result
 
-statFields = ['commits', 'percent', 'deletions', 'insertions']
 deduplicateUser = (users, emails)->
+  statFields = ['commits', 'deletions', 'insertions']
   # merge the user of the same email address
   t = users
   users = []
@@ -59,6 +59,8 @@ module.exports = (options, done)->
   dirname = options.dirname
   usersCache = options.users || {}
   fields  = options.fields
+  weight  = options.weight
+  weight = commit:weight if _.isNumber weight
   ixEmails = genEmailIndex usersCache
   needUpdateCache = false
   addFieldsToContributors = (contributors, fields)->
@@ -70,7 +72,10 @@ module.exports = (options, done)->
       else unless needUpdateCache
         needUpdateCache = true
     return
-  gitListContributors {cwd: path.resolve(dirname)}
+  vOptions = cwd: path.resolve(dirname)
+  vOptions.revisionRange = options.branch if options.branch
+  vOptions.path = options.path if options.path
+  gitListContributors vOptions
   .then (users)->
     users = deduplicateUser users, ixEmails
     addFieldsToContributors(users, fields)
@@ -85,7 +90,7 @@ module.exports = (options, done)->
       askInput users, fields
     else
       users
-  .then (users)->
+  .then (users)-> # write to .contributor file if new committer found.
     if options.write and needUpdateCache
       for user in users
         continue unless user.id?
@@ -107,9 +112,22 @@ module.exports = (options, done)->
       .then ->users
     else
       users
+  .then (users)-> # calc percentage contribution
+    total = 0
+    users.forEach (user)->
+      vContribution = user.insertions
+      if weight
+        vContribution += user.commits * weight.commit if _.isNumber weight.commit
+        vContribution += user.deletions * weight.deletion if _.isNumber weight.deletion
+      total += vContribution
+      user.contribution = vContribution
+      return
+    users.forEach (user)->
+      user.percent = (user.contribution * 1.0 / total * 100.0).toFixed(1)
+    users
   .then (users)-> # sort by percent
     _.sortBy users, (committer)->
-      return -committer.commits
+      return -committer.percent
   .then (users)-> # filter fields:
     if _.isArray(fields)
       users.forEach (user)->

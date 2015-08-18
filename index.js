@@ -17,6 +17,7 @@ const defaultOptions = {
   config: optsfileName,
   dirname: cwd,
   fields: 'name,github',
+  weight: {commit:0.618,deletion:0.2},
   format: 'json',
   tryGithub: true,
   write: true
@@ -24,12 +25,14 @@ const defaultOptions = {
 const aliasOptions = {
     h: 'help',
     a: 'ask',
+    b: 'branch',
     c: 'config',
     d: 'dirname',
     e: 'fields',
     f: 'format',
     g: 'tryGithub',
     i: 'info',
+    p: 'weight',
     t: 'template',
     w: 'write'
 }
@@ -59,6 +62,14 @@ if (_.isString(argv.fields)) {
   argv.fields = argv.fields.split(',')
 }
 
+if (_.isString(argv.weight)) {
+  try {
+    argv.weight = CSON.parseCSONString(argv.weight)
+  } catch(e) {
+    argv.weight = defaultOptions.weight
+  }
+}
+
 if (argv.info) {
   console.error(argv)
 }
@@ -66,7 +77,7 @@ if (argv.info) {
 if (argv.help) {
   var pkg = CSON.requireFile(path.join(__dirname, 'package.json'))
   var file = require('read-file')
-  var usage = file.readFileSync(path.join(__dirname, 'usage.txt')) 
+  var usage = file.readFileSync(path.join(__dirname, 'usage.txt'))
   console.log('Version:', pkg.version)
   console.log(usage)
 } else {
